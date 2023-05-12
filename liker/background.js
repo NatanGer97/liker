@@ -60,6 +60,16 @@
   });
    */
 
+  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (
+      tab.url &&
+      tab.url.includes("https://web.whatsapp.com/") &&
+      changeInfo.status === "complete"
+    ) {
+      chrome.tabs.sendMessage(tabId, { type: "NEW", tabId: tabId });
+
+    }
+  });
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "processLinks") {
       console.log("Message from popup.js:", message);

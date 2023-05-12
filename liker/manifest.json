@@ -1,0 +1,22 @@
+{
+    "name": "Liker",
+    "version": "0.1.0",
+    "description": "",
+    "permissions": ["storage", "tabs", "activeTab", "scripting"],
+    "host_permissions": ["https://*/*", "http://*/*"],
+    "action": {
+      "default_title": "LinksScrapper",
+      "default_popup": "popup.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://*/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "manifest_version": 3
+  }
+  

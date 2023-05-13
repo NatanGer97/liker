@@ -6,12 +6,14 @@ let user;
 document.addEventListener("DOMContentLoaded", async function () {
   isNewUser();
   await getUser();
-
   initLikeBtn();
-
+  const activeTab = await getActiveTabURL();
+  if (!activeTab.url.includes("web.whatsapp.com")) {
+    const container = document.getElementsByClassName("container")[0];
+    container.innerHTML =
+      '<div class="container">This is not a valid  page.</div>';
+  }
 });
-
-
 
 const getNotLikedLinksFromDB = async (groupName, minusDays) => {
   try {
@@ -66,7 +68,7 @@ const likeClickHandler = async (event) => {
   /* for (let link of links) {
     fittingLinks.push(link.link)
   } */
-let likedLinks = [];
+  let likedLinks = [];
   for (let link of links) {
     if (link.link.includes("nivitzhaky") && !fittingLinks.includes(link.link)) {
       fittingLinks.push(link.link);
@@ -82,16 +84,15 @@ let likedLinks = [];
   // ];
 
   // send like req to server
-  
+
   console.log("likedLinks", likedLinks);
-  
+
   if (likedLinks.length > 0) {
     sendLikeRequest(likedLinks);
     chrome.runtime.sendMessage({ type: "processLinks", links: fittingLinks });
   } else {
     alert("No links to like");
   }
-  
 };
 
 const sendLikeRequest = async (links = []) => {

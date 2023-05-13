@@ -1,0 +1,22 @@
+body {
+  background-color: aliceblue;
+}
+
+.title-btn {
+    border: none;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 400;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}

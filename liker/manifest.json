@@ -16,6 +16,7 @@
         "matches": ["*://*/*"],
         "js": ["contentScript.js"]
       }
+
     ],
     "manifest_version": 3
   }

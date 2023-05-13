@@ -63,20 +63,18 @@ const likeClickHandler = async (event) => {
 
   let links = await getNotLikedLinksFromDB(groupName, minusDays);
   console.log("links", links);
-  let fittingLinks = [];
+  let fittingLinksToLike = [];
 
-  /* for (let link of links) {
-    fittingLinks.push(link.link)
-  } */
-  let likedLinks = [];
+
+  let likedLinksForReq = [];
   for (let link of links) {
-    if (link.link.includes("nivitzhaky") && !fittingLinks.includes(link.link)) {
-      fittingLinks.push(link.link);
-      likedLinks.push(link);
+    if (!fittingLinksToLike.includes(link.link)) {
+      fittingLinksToLike.push(link.link);
+      likedLinksForReq.push(link);
     }
   }
 
-  console.log("fittingLinks", fittingLinks);
+  // console.log("fittingLinksToLike", fittingLinksToLike);
   // links = [
   //   "https://www.linkedin.com/posts/nivitzhaky_potfolio-juniordeveloper-gethired-activity-7061228133311520768-EUnp?utm_source=share&utm_medium=member_desktop",
   //   "https://www.linkedin.com/posts/nivitzhaky_devops-activity-7060879940476444672-CO0U?utm_source=share&utm_medium=member_desktop",
@@ -85,11 +83,11 @@ const likeClickHandler = async (event) => {
 
   // send like req to server
 
-  console.log("likedLinks", likedLinks);
+  // console.log("likedLinksForReq", likedLinksForReq);
 
-  if (likedLinks.length > 0) {
-    sendLikeRequest(likedLinks);
-    chrome.runtime.sendMessage({ type: "processLinks", links: fittingLinks });
+  if (likedLinksForReq.length > 0) {
+    sendLikeRequest(likedLinksForReq);
+    chrome.runtime.sendMessage({ type: "processLinks", links: fittingLinksToLike });
   } else {
     alert("No links to like");
   }

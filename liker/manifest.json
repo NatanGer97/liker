@@ -1,7 +1,8 @@
 {
-    "name": "Liker",
+    "name": "Liker - LinkedIn Likes Chrome Extension",
     "version": "0.1.0",
-    "description": "",
+    "description": "The LinkedIn Likes Chrome Extension is a powerful tool designed to simplify the process of engaging with LinkedIn posts by automatically providing likes. This extension utilizes scraped links from WhatsApp groups, allowing you to effortlessly like posts without manual intervention.",
+    
     "permissions": ["storage", "tabs", "activeTab", "scripting"],
     "host_permissions": ["https://*/*", "http://*/*"],
     "action": {

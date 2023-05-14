@@ -24,6 +24,7 @@
 
   function extractLinksFromMessages(messages) {
     const fittingLinks = [];
+    // console.log("messages", messages);
 
     for (const message of messages) {
       const messageContainer = message.querySelector("div.copyable-text");
@@ -120,9 +121,10 @@
   };
 
   const onChatScrollHandler = throttle(() => {
+    // console.log("onChatScrollHandler");
     const chat = document.querySelector("div._2gzeB");
     const messages = chat.querySelectorAll(
-      ".cm280p3y.to2l77zo.n1yiu2zv.ft2m32mm.oq31bsqd.e1yunedv"
+      "div.cm280p3y"
     );
 
     const extractedLinks = extractLinksFromMessages(messages);
@@ -130,6 +132,8 @@
       addLinksToDB(extractedLinks);
     }
   }, 2000); // Throttle delay of 2000 milliseconds
+
+
 
   function handleSidePanelClick(event) {
     getGroupChatName();

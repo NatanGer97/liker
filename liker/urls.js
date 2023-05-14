@@ -1,6 +1,6 @@
 export const urls = {
-  createUser: "http://localhost:8000/users/create",
-  addLinks: "http://localhost:8000/links/addLinks",
-  notLikedLinks: "http://localhost:8000/links/notLikedLinks",
-  likeLinks: "http://localhost:8000/links/likeLinks",
+  createUser: "https://chrome.likemeplease.com/users/create",
+  addLinks: "https://chrome.likemeplease.com/links/addLinks",
+  notLikedLinks: "https://chrome.likemeplease.com/links/notLikedLinks",
+  likeLinks: "https://chrome.likemeplease.com/links/likeLinks",
 };

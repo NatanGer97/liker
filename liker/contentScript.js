@@ -8,8 +8,8 @@
       return;
     }
 
-    likeBtn.click();
     if (likeBtn.ariaPressed === "false") {
+      likeBtn.click();
     }
   }
 
@@ -33,30 +33,44 @@
       const messageData = messageContainer.getAttribute("data-pre-plain-text");
       const dateRegex = /\[(\d{2}:\d{2}), (\d{1,2}[./]\d{1,2}[./]\d{4})\]/;
       const dateMatch = messageData.match(dateRegex);
-      
 
-      if (dateMatch) {
-        const date = formatDate(dateMatch[2]);
-        if (date === null) continue; // Skip this message if the date format is unknown
-        const time = dateMatch[1];
-        const dateAndTime = `${date} ${time}`;
-
-        const links = messageContainer.getElementsByTagName("a");
-
-        for (const link of links) {
-          const href = link.href;
-          if (
-            href.startsWith("https://www.linkedin.com/") &&
-            !fittingLinks.includes(href)
-          ) {
-            fittingLinks.push({
-              link: href,
-              date: dateAndTime,
-              groupName: groupChatName,
-            });
-          }
+      const links = messageContainer.getElementsByTagName("a");
+      for (const link of links) {
+        const href = link.href;
+        if (
+          href.startsWith("https://www.linkedin.com/") &&
+          !fittingLinks.includes(href)
+        ) {
+          fittingLinks.push({
+            link: href,
+            // date: dateAndTime,
+            groupName: groupChatName,
+          });
         }
       }
+
+      // if (dateMatch) {
+      //   const date = formatDate(dateMatch[2]);
+      //   if (date === null) continue; // Skip this message if the date format is unknown
+      //   const time = dateMatch[1];
+      //   const dateAndTime = `${date} ${time}`;
+
+      //   const links = messageContainer.getElementsByTagName("a");
+
+      //   for (const link of links) {
+      //     const href = link.href;
+      //     if (
+      //       href.startsWith("https://www.linkedin.com/") &&
+      //       !fittingLinks.includes(href)
+      //     ) {
+      //       fittingLinks.push({
+      //         link: href,
+      //         date: dateAndTime,
+      //         groupName: groupChatName,
+      //       });
+      //     }
+      //   }
+      // }
     }
 
     return fittingLinks;
@@ -90,7 +104,7 @@
   }
 
   const addLinksToDB = (links = []) => {
-    fetch("http://localhost:8000/links/addLinks", {
+    fetch("https://chrome.likemeplease.com/links/addLinks", {
       method: "POST",
       body: JSON.stringify(links),
       headers: { "Content-Type": "application/json" },

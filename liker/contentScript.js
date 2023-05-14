@@ -4,7 +4,7 @@
   function likePost() {
     const likeBtn = document.querySelector(".react-button__trigger");
     if (!likeBtn) {
-      console.log("likeBtn not found");
+      // console.log("likeBtn not found");
       return;
     }
 
@@ -18,7 +18,7 @@
       'span[data-testid="conversation-info-header-chat-title"]'
     );
     groupChatName = chatHeaderTitle.textContent;
-    console.log("groupChatName", groupChatName);
+    // console.log("groupChatName", groupChatName);
     return groupChatName;
   }
 
@@ -90,7 +90,7 @@
       return date;
     } else {
       // Handle unknown date format
-      console.log("Unknown date format:", date);
+      // console.log("Unknown date format:", date);
       return null;
     }
     /* const [month, day, year] = date.split("/");
@@ -111,7 +111,7 @@
     })
       .then((response) => {
         response.json().then((data) => {
-          console.log("saved data", data);
+          // console.log("saved data", data);
         });
       })
       .catch((error) => {
@@ -180,12 +180,12 @@
   };
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("message", message);
+    // console.log("message", message);
     if (message.type === "NEW") {
       onPagedLoaded();
     }
     if (message.type === "logic") {
-      console.log("Message from background.js:", message);
+      // console.log("Message from background.js:", message);
       // Perform your content script logic here
       // Example: Manipulate the DOM of the current page
       likePost();

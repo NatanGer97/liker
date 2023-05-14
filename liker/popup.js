@@ -74,12 +74,6 @@ const likeClickHandler = async (event) => {
     }
   }
 
-  // console.log("fittingLinksToLike", fittingLinksToLike);
-  // links = [
-  //   "https://www.linkedin.com/posts/nivitzhaky_potfolio-juniordeveloper-gethired-activity-7061228133311520768-EUnp?utm_source=share&utm_medium=member_desktop",
-  //   "https://www.linkedin.com/posts/nivitzhaky_devops-activity-7060879940476444672-CO0U?utm_source=share&utm_medium=member_desktop",
-  //   "https://www.linkedin.com/posts/nivitzhaky_devops-jenkins-github-activity-7061618358328131584-vDRE?utm_source=share&utm_medium=member_desktop",
-  // ];
 
   // send like req to server
 
@@ -128,11 +122,11 @@ const getUser = async () => {
 function isNewUser() {
   chrome.storage.local.get("user", function (result) {
     if (!result.user) {
-      console.log("new user");
+      // console.log("new user");
       createNewUser();
     } else {
-      console.log(result.user);
-      console.log("user exist");
+      // console.log(result.user);
+      // console.log("user exist");
     }
   });
 }
@@ -143,7 +137,7 @@ async function createNewUser() {
   try {
     const results = await fetch(urls.createUser, { method: "POST" });
     const resultsAsJson = await results.json();
-    console.log("new user", JSON.stringify(resultsAsJson));
+    // console.log("new user", JSON.stringify(resultsAsJson));
     chrome.storage.local.set({ user: resultsAsJson.user_uuid });
   } catch (error) {
     console.log("error", error);

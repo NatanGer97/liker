@@ -1,6 +1,6 @@
 {
     "name": "Liker - LinkedIn Likes Chrome Extension",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Liker - LinkedIn Likes Chrome Extension",
 
     "permissions": ["storage", "tabs", "activeTab", "scripting"],

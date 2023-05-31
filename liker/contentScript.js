@@ -1,3 +1,4 @@
+
 (() => {
   let groupChatName = "";
 
@@ -10,6 +11,22 @@
 
     if (likeBtn.ariaPressed === "false") {
       likeBtn.click();
+      /*   chrome.storage.local.get("user", (result) => {
+        const user = result.user;
+        const body = { url: url, user: user };
+        fetch("http://localhost:8000/links/like", {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: { "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*" },
+        })
+          .then((response) => {
+            console.log("response", response);
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+      }); */
     }
   }
 
@@ -121,11 +138,11 @@
   };
 
   const onChatScrollHandler = throttle(() => {
-    // console.log("onChatScrollHandler");
-    const chat = document.querySelector("div._2gzeB");
-    const messages = chat.querySelectorAll(
-      "div.cm280p3y"
-    );
+    /* console.log("onChatScrollHandler"); */
+
+    /* const chat = document.querySelector("div._2gzeB"); */
+    const messages = document.querySelectorAll("div.cm280p3y");
+    /* console.log("messages", messages); */
 
     const extractedLinks = extractLinksFromMessages(messages);
     if (extractedLinks.length > 0) {
@@ -133,12 +150,10 @@
     }
   }, 2000); // Throttle delay of 2000 milliseconds
 
-
-
   function handleSidePanelClick(event) {
     getGroupChatName();
-    const chat = document.querySelector("div._2gzeB");
-    const messagesPanel = chat.querySelector(
+    /* const chat = document.querySelector("div._2gzeB"); */
+    const messagesPanel = document.querySelector(
       'div._5kRIK[data-testid="conversation-panel-messages"]'
     );
 
@@ -170,7 +185,7 @@
   const onPagedLoaded = () => {
     const sidePanel = document.getElementById("pane-side");
 
-    const handleClickOnSidePanel = (event) => {
+ /*    const handleClickOnSidePanel = (event) => {
       getGroupChatName();
       const chat = document.querySelector("div._2gzeB");
       const messagesPanel = chat.querySelector(
@@ -178,7 +193,7 @@
       );
 
       messagesPanel.addEventListener("scroll", onChatScrollHandler);
-    };
+    }; */
 
     sidePanel.addEventListener("click", handleSidePanelClick);
   };
@@ -195,21 +210,19 @@
       likePost();
       sendResponse();
 
-      // document.body.style.backgroundColor = "red";
-      // setTimeout(() => {
-
-      //     sendResponse();
-      // }, 5000);
 
       // Signal completion to the background script
     }
 
-    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-        if (message.type === "getGroupName") {
-          const name  = getGroupChatName();
-          sendResponse({ groupName: name });
-        }
-      });
-      
+    chrome.runtime.onMessage.addListener(function (
+      message,
+      sender,
+      sendResponse
+    ) {
+      if (message.type === "getGroupName") {
+        const name = getGroupChatName();
+        sendResponse({ groupName: name });
+      }
+    });
   });
 })();

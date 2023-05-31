@@ -76,11 +76,10 @@ const likeClickHandler = async (event) => {
 
 
   // send like req to server
-
   // console.log("likedLinksForReq", likedLinksForReq);
 
   if (likedLinksForReq.length > 0) {
-    sendLikeRequest(likedLinksForReq);
+    // sendLikeRequest(likedLinksForReq);
     chrome.runtime.sendMessage({ type: "processLinks", links: fittingLinksToLike });
   } else {
     alert("No links to like");

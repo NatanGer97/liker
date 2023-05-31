@@ -20,11 +20,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return;
       }
 
+      
       const firstLink = links.shift();
 
       const tabProperties = { url: firstLink, active: true };
 
       chrome.tabs.create(tabProperties, (tab) => {
+        
         waitForPageLoad(tab, links);
       });
     }
@@ -33,7 +35,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
         if (tabId === tab.id && changeInfo.status === "complete") {
           chrome.tabs.onUpdated.removeListener(listener);
-
+          
           setTimeout(() => {
             performLogicInTab(tab, () => {
               processNextLink(tab, links);
@@ -58,9 +60,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     function performLogicInTab(tab, callback) {
       setTimeout(() => {
         chrome.tabs.sendMessage(tab.id, { type: "logic" }, (response) => {
-          //console.log("Received response from content script:", response);
+          console.log("Received response from content script:", response);
           // Handle the response from the content script if needed
-
+          
           // Call the callback function to proceed to the next link
           if (typeof callback === "function") {
             callback();
@@ -89,5 +91,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "GROUP-NAME-RESULTS") {
       //console.log("groupName", message.groupName);
     }
+
+  
   }
 });

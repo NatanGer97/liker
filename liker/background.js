@@ -72,8 +72,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 
     function getRandomDelay() {
-      const minDelay = 1000; // Minimum delay in milliseconds
-      const maxDelay = 3000; // Maximum delay in milliseconds
+      const minDelay = 4000; // Minimum delay in milliseconds
+      const maxDelay = 10000; // Maximum delay in milliseconds
       return Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
     }
   }
